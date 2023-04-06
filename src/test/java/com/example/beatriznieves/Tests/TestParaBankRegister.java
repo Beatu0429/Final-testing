@@ -1,7 +1,12 @@
 package com.example.beatriznieves.Tests;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.example.beatriznieves.Pages.PageNewBankAccount;
 import com.example.beatriznieves.Pages.PageParaBankRegister;
+import com.example.beatriznieves.extentReport.ExtentFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

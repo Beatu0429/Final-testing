@@ -20,15 +20,14 @@ public class PageNewBankAccount extends BasePage{
     public PageNewBankAccount(WebDriver driver) {
     }
 
-    public void LoginUser(){
-        teclear("AdriYcerebro2", inputUsername);
+    public void newBankAccount(){
+        teclear("AdriYcerebro", inputUsername);
         teclear("213167", inputPassword);
         oprimir(loginButton);
         oprimir(newAccountLink);
         oprimir(checkBox);
         oprimir(checkSavings);
         oprimir(newAccountButton);
-
         waitForTextToBePresent(resultMessage, "Congratulations, your account is now open.", 100);
 
     }

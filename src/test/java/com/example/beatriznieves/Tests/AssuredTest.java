@@ -42,54 +42,60 @@ public class AssuredTest {
     }
 
     @Test
-    public void testUser() {
+    public void testRegister() {
         given()
                 .when()
-                .get("https://reqres.in/api/users/2")
+                .get("https://parabank.parasoft.com/parabank/register.htm")
                 .then()
-                .statusCode(200)
-                .body("data.id", equalTo(2));
+                .statusCode(200);
     }
 
     @Test
-    public void testUserFirstName() {
-        given()
-                .when()
-                .get("https://reqres.in/api/users/2")
-                .then()
-                .statusCode(200)
-                .body("data.first_name", equalTo("Janet"));
-    }
-
-    @Test
-    public void testDeleteUser() {
-        given()
-                .when()
-                .delete("https://reqres.in/api/users/2")
-                .then()
-                .assertThat ()
-                .statusCode(204)
-                .log().everything();
-    }
-
-    @Test
-    public void logInUser() {
-
-        JSONObject requestBody = new JSONObject();
-        requestBody.put("email", "eve.holt@reqres.in");
-        requestBody.put("password", "cityslicka");
+    public void testNewAccount() {
 
         given()
-                .header("Content-type","application/json")
                 .contentType(ContentType.JSON)
-                .body(requestBody.toString())
+                .with().queryParam("customerId", 12767).queryParam("newAccountType", 1)
+                .queryParam("fromAccountId", 14010).auth().basic("AdriYcerebro", "213167")
                 .when()
-                .post("https://reqres.in/api/login")
+                .post("https://parabank.parasoft.com/parabank/services_proxy/bank/createAccount")
                 .then()
-                .assertThat ()
-                .statusCode(200)
-                .body("token", notNullValue())
-                .log().everything();
+                .statusCode(200);
+    }
+
+    @Test
+    public void testAccountOverview() {
+        given()
+                .contentType(ContentType.JSON)
+                .with().auth().basic("AdriYcerebro", "213167")
+                .when()
+                .get("https://parabank.parasoft.com/parabank/services_proxy/bank/customers/12767/accounts")
+                .then()
+                .statusCode(200);
+    }
+
+    @Test
+    public void downloadImages() {
+
+        given()
+                .contentType(ContentType.JSON)
+                .with().queryParam("fromAccountId", 14010).queryParam("toAccountId", 14454)
+                .queryParam("amount", 2).auth().basic("AdriYcerebro", "213167")
+                .when()
+                .post("https://parabank.parasoft.com/parabank/services_proxy/bank/transfer")
+                .then()
+                .statusCode(200);
+    }
+
+    @Test
+    public void testAccountMonth() {
+        given()
+                .contentType(ContentType.JSON)
+                .with().auth().basic("AdriYcerebro", "213167")
+                .when()
+                .get("https://parabank.parasoft.com/parabank/services_proxy/bank/accounts/13566/transactions/month/All/type/All")
+                .then()
+                .statusCode(200);
     }
 
 

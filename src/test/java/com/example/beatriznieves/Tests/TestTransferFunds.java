@@ -1,23 +1,24 @@
 package com.example.beatriznieves.Tests;
 
 import com.example.beatriznieves.Pages.PageNewBankAccount;
+import com.example.beatriznieves.Pages.PageTransferFunds;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
-public class TestParaNewAccount {
+public class TestTransferFunds {
 
-    PageNewBankAccount pageNewBankAccount;
+    PageTransferFunds pageTransferFunds;
+
     private WebDriver driver;
 
     @BeforeEach
     public void setUp() throws Exception {
-        pageNewBankAccount = new PageNewBankAccount(driver);
-        driver = pageNewBankAccount.chromeDriverConnection();
-        pageNewBankAccount.link("https://parabank.parasoft.com/parabank/index.htm?ConnType=JDBC");
+        pageTransferFunds = new PageTransferFunds(driver);
+        driver = pageTransferFunds.chromeDriverConnection();
+        pageTransferFunds.link("https://parabank.parasoft.com/parabank/index.htm?ConnType=JDBC");
     }
-
 
     @AfterEach
     public void tearDown() throws Exception {
@@ -26,6 +27,7 @@ public class TestParaNewAccount {
 
     @Test
     public void testNewAccount() throws InterruptedException{
-        pageNewBankAccount.newBankAccount();
+        pageTransferFunds.transferFunds();
     }
+
 }
